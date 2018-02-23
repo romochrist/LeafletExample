@@ -1,0 +1,38 @@
+---
+title: "LeafletExample"
+author: "Christian Romo"
+date: "22/02/2018"
+output:
+    html_document:
+        keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+```
+
+```{r libraries}
+    require(leaflet)
+```
+
+```{r map}
+    places <- data.frame(
+        lat = c(19.4270206, 19.4362086, 19.4352121, 19.4352, 19.4204397), 
+        lng = c(-99.1686937, -99.1568185, -99.1340649, -99.1433887, -99.1841237)
+    )
+    names <- c("Angel de la Independencia",
+               "Monumento a la Revoluci&oacute;n", 
+               "Z&oacute;calo",
+               "Palacio de Bellas Artes",
+               "Castillo de Chapultepec")
+    placeIcon <- makeIcon(
+        iconUrl = "https://www.shareicon.net/data/128x128/2016/10/29/848594_bank_512x512.png", 
+        iconWidth = 31*215/230 , iconHeight = 31, 
+        iconAnchorX = 31*215/230/2, iconAnchorY = 16
+    )
+    
+    places %>% 
+        leaflet() %>% 
+        addTiles() %>%
+        addMarkers(popup = names, icon = placeIcon)
+```
